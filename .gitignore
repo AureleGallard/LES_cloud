@@ -13,6 +13,9 @@ ipython_config.py
 # folders
 jobs/
 plotting/
+Precip/
 
 # file types
 *.nc
+*.h5
+

@@ -1,6 +1,6 @@
 # nonlinear-CandR-inversion
 
-Relevant file is data_gen.ipynb.
+Relevant file is pp_model/data_gen.ipynb.
 
 Use generate_ktf17_dataset_optimal to get thetas, x, and y.
 

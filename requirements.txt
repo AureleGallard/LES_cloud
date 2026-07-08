@@ -1,0 +1,14 @@
+numpy
+matplotlib
+netCDF4
+scipy
+
+emcee
+seaborn
+
+ipykernel
+
+numba
+h5py
+
+torch

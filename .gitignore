@@ -19,3 +19,6 @@ Precip/
 *.nc
 *.h5
 
+.venv
+*.pt
+*.npy

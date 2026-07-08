@@ -256,7 +256,7 @@ def prior(theta, max_H0 = 4000, max_tau = 720, max_T = 720,
         return 1
     
 #posterior function using SVD
-def log_post(theta, Hd, Hd_max, og_len, u, l, H_in): 
+def log_post(theta, Hd, Hd_max, og_len, u, l, H_in, with_M=False): 
     '''
     Solves for log posterior probability of a set of cloud 
     parameters theta against a cloud cycle data set
@@ -284,8 +284,10 @@ def log_post(theta, Hd, Hd_max, og_len, u, l, H_in):
     
     '''
     test_prior = prior(theta)
-    if (test_prior == 0): 
-        return (-1)*np.inf
+    if (test_prior == 0):
+        if with_M:
+            return (-1)*np.inf, None
+        else : return (-1)*np.inf
     else: 
         H0 = theta[0]
         tau = theta[1]
@@ -311,7 +313,9 @@ def log_post(theta, Hd, Hd_max, og_len, u, l, H_in):
             M = M[M_max - Hd_max:]
         else: 
             M = np.concatenate((np.zeros(Hd_max - M_max), M))
-        return       -0.5*(np.linalg.norm((u.T@(Hd - H_in@M))/np.sqrt(l))**2)
+        if with_M:
+            return -0.5*(np.linalg.norm((u.T@(Hd - H_in@M))/np.sqrt(l))**2), (H_in @ M)
+        else : return -0.5*(np.linalg.norm((u.T@(Hd - H_in@M))/np.sqrt(l))**2)
     
 def find_spinup_end(cloud_fraction, tol = 0.001): 
     cfs = cloud_fraction[100:]
